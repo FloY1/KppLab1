@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainWidowKatalogController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <right>
+            <Pane prefHeight="574.0" prefWidth="235.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane fx:id="menuPane" prefHeight="574.0" prefWidth="235.0" style="-fx-background-color: #8f979d9c;">
+                     <children>
+                        <Line endX="100.0" layoutX="101.0" layoutY="83.0" startX="-100.0" />
+                        <ImageView fitHeight="38.0" fitWidth="83.0" layoutX="99.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/HomeImg.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="Music" fill="#295279e8" layoutX="61.0" layoutY="193.0" onMouseClicked="#catalogButtonClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" />
+                        <Circle fx:id="Film" fill="#295279e8" layoutX="174.0" layoutY="193.0" onMouseClicked="#catalogButtonClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" />
+                        <Circle fx:id="Book" fill="#295279e8" layoutX="61.0" layoutY="287.0" onMouseClicked="#catalogButtonClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" />
+                        <Circle fx:id="Doc" fill="#295279e8" layoutX="174.0" layoutY="287.0" onMouseClicked="#catalogButtonClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" radius="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" />
+                        <Text fx:id="MText" layoutX="38.0" layoutY="71.0" opacity="0.79" strokeType="OUTSIDE" strokeWidth="0.0" text="Сatalog" wrappingWidth="159.7294921875">
+                           <font>
+                              <Font name="Norasi" size="47.0" />
+                           </font>
+                        </Text>
+                        <ImageView fx:id="musicIng" disable="true" fitHeight="38.0" fitWidth="38.0" layoutX="39.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/music.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView disable="true" fitHeight="38.0" fitWidth="38.0" layoutX="155.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/video.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView disable="true" fitHeight="38.0" fitWidth="38.0" layoutX="42.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/book.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView disable="true" fitHeight="38.0" fitWidth="38.0" layoutX="155.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/Docum.png" />
+                           </image>
+                        </ImageView>
+                        <Text layoutX="7.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coder: Floy" />
+                        <Text layoutX="7.0" layoutY="565.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mail: artem.smolonskiy@mail.ru" />
+                        <Line endX="100.0" layoutX="101.0" layoutY="531.0" startX="-100.0" />
+                        <StackPane fx:id="sigStackPane" layoutX="25.0" layoutY="337.0" prefHeight="150.0" prefWidth="186.0">
+                           <children>
+                              <VBox prefHeight="134.0" prefWidth="199.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sign in" textAlignment="CENTER" wrappingWidth="164.7294921875">
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="Mukti Narrow" size="20.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="loginField" alignment="TOP_CENTER" maxWidth="200.0" prefHeight="23.0" prefWidth="176.0" promptText="Login" style="-fx-background-color: f3f8f4cc; -fx-border-style: none;" text="Guest">
+                                       <VBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="Mukti Narrow Bold" size="17.0" />
+                                       </font>
+                                    </TextField>
+                                    <PasswordField fx:id="passwordField" alignment="TOP_CENTER" promptText="password">
+                                       <font>
+                                          <Font name="Mukti Narrow Bold" size="17.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
+                                    </PasswordField>
+                                    <Button fx:id="sigButton" mnemonicParsing="false" onAction="#sigClick" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #f3f8f4cc;" text="sign in" textAlignment="CENTER" textOverrun="CLIP">
+                                       <VBox.margin>
+                                          <Insets bottom="4.0" left="55.0" right="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="Mukti Narrow Bold" size="14.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </StackPane>
+                        <StackPane fx:id="userStack" disable="true" layoutX="25.0" layoutY="337.0" opacity="0.0" prefHeight="150.0" prefWidth="186.0">
+                           <children>
+                              <VBox prefHeight="134.0" prefWidth="199.0">
+                                 <children>
+                                    <Text fx:id="userName" strokeType="OUTSIDE" strokeWidth="0.0" text="User" textAlignment="CENTER" wrappingWidth="164.7294921875">
+                                       <font>
+                                          <Font name="Mukti Narrow" size="20.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Text>
+                                    <ImageView fx:id="userImg" fitHeight="72.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/book.jpeg" />
+                                       </image>
+                                       <VBox.margin>
+                                          <Insets left="55.0" />
+                                       </VBox.margin>
+                                    </ImageView>
+                                    <Button fx:id="ExitButton" mnemonicParsing="false" onAction="#exitClic" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #f3f8f4cc;" text="Exit" textAlignment="CENTER" textOverrun="CLIP">
+                                       <font>
+                                          <Font name="Mukti Narrow Bold" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="4.0" left="55.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </StackPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </Pane>
+                  <Pane fx:id="listPane" disable="true" opacity="0.0" prefHeight="574.0" prefWidth="235.0" style="-fx-background-color: #8f979d9c;">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <VBox prefHeight="574.0" prefWidth="235.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Button fx:id="homeButton" mnemonicParsing="false" onMouseClicked="#homeClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefHeight="36.0" prefWidth="72.0" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/Home.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onMouseClicked="#addByttonClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefHeight="36.0" prefWidth="72.0" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/addButton.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onMouseClicked="#deleteButtonClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefHeight="36.0" prefWidth="72.0" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../img/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Music" textAlignment="RIGHT" wrappingWidth="94.7294921875">
+                                       <font>
+                                          <Font name="Norasi" size="19.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                              <TableView fx:id="tableView" prefHeight="534.0" prefWidth="235.0">
+                                <columns>
+                                  <TableColumn fx:id="tableColum" editable="false" prefWidth="234.0" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </right>
+      </BorderPane>
+   </children>
+</StackPane>

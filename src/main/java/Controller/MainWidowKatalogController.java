@@ -1,0 +1,152 @@
+package Controller;
+
+
+
+import Controller.MyEffect.Effects;
+
+import DataElements.Data;
+import Factory.UserFactory;
+import dbLogic.dao.service.DataService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import org.apache.log4j.Logger;
+import users.Users;
+
+import java.io.File;
+import java.util.List;
+
+
+public class MainWidowKatalogController {
+
+
+
+    @FXML
+    private PasswordField passwordField;
+
+    @FXML
+    private TextField loginField;
+
+    @FXML
+    private StackPane sigStackPane;
+
+    @FXML
+    private StackPane userStack;
+
+    @FXML
+    private Pane menuPane;
+
+    @FXML
+    private Pane listPane;
+
+    @FXML
+    private TableView tableView;
+
+    @FXML
+    private  TableColumn<Data,String> tableColum;
+
+
+    private ObservableList<Data> list = FXCollections.observableArrayList();
+
+    private Users user;
+
+    private DataService dataService;
+
+    private Effects effect;
+
+    private static final Logger logger = Logger.getLogger(MainWidowKatalogController.class);
+
+
+    public void initialize() {
+        tableColum.setCellValueFactory(new PropertyValueFactory<>("fileName"));
+        tableView.setItems(list);
+        effect = new Effects(sigStackPane, userStack, menuPane, listPane);
+
+
+    }
+
+    public void homeClick() {
+        effect.homeClick();
+        list.clear();
+        dataService.closeConnectin();
+        logger.info("Successful");
+    }
+
+    public void catalogButtonClick(Event event) {
+        effect.catalogButtonClick();
+
+        Node currentNode = (Node) event.getSource();
+
+        dataService = new DataService(currentNode.getId());
+
+
+        List<Data> dataList = dataService.getAll();
+        list.addAll(dataList);
+
+    }
+
+    public void enteredButton(Event actionEvent) {
+
+        effect.enteredButton(actionEvent);
+
+    }
+
+    public void exitedButton(Event actionEvent) {
+        effect.exitedButton(actionEvent);
+
+    }
+
+
+    public void sigClick() {
+
+        user = UserFactory.getUser(loginField.getText(),passwordField.getText());
+
+        effect.sigClick(user.toString());
+
+    }
+
+
+    public void exitClic() {
+        effect.exitClic();
+    }
+
+
+
+    public void addByttonClick(Event event) {
+        File file = new FileChooser().showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+        if (file == null)
+            logger.info("no choose File");
+        else {
+           Data data = new Data(file.getName(), file.getPath());
+            list.add(data);
+            dataService.add(data);
+            logger.info("Successful");
+        }
+
+
+    }
+
+
+    public void deleteButtonClick() {
+        int currentRowIndex =tableView.getSelectionModel().getFocusedIndex();
+        dataService.remove(list.get(currentRowIndex));
+        list.remove(list.get(currentRowIndex));
+        logger.info("Successful");
+    }
+
+}
+
+
+
+
+

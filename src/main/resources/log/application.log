@@ -1,0 +1,9 @@
+WARN  2018-03-14 17:23:04 Factory.UserFactory {JavaFX Application Thread} [getUser]: incorrect login to the system
+INFO  2018-03-14 17:23:04 Factory.UserFactory {JavaFX Application Thread} [getUser]: 
+INFO  2018-03-14 17:24:01 Factory.UserFactory {JavaFX Application Thread} [getUser]: isGuest
+INFO  2018-03-14 17:24:12 Factory.UserFactory {JavaFX Application Thread} [getUser]: incorrect User password
+INFO  2018-03-14 17:24:27 Factory.UserFactory {JavaFX Application Thread} [getUser]: incorrect User password
+INFO  2018-03-14 17:24:48 Factory.UserFactory {JavaFX Application Thread} [getUser]: incorrect Admin password
+INFO  2018-03-14 17:26:27 Factory.UserFactory {JavaFX Application Thread} [getUser]: isGuest
+INFO  2018-03-14 17:26:34 Factory.UserFactory {JavaFX Application Thread} [getUser]: isUser
+INFO  2018-03-14 17:26:54 Factory.UserFactory {JavaFX Application Thread} [getUser]: isAdmin
