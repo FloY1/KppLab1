@@ -17,8 +17,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.log4j.Logger;
 import users.Users;
@@ -29,7 +31,11 @@ import java.util.List;
 
 public class MainWidowKatalogController {
 
+    @FXML
+    private ImageView userImg;
 
+    @FXML
+    private Text userName;
 
     @FXML
     private PasswordField passwordField;
@@ -70,7 +76,7 @@ public class MainWidowKatalogController {
     public void initialize() {
         tableColum.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         tableView.setItems(list);
-        effect = new Effects(sigStackPane, userStack, menuPane, listPane);
+        effect = new Effects(sigStackPane, userStack, menuPane, listPane, userName,userImg);
 
 
     }
@@ -111,13 +117,17 @@ public class MainWidowKatalogController {
 
         user = UserFactory.getUser(loginField.getText(),passwordField.getText());
 
+
         effect.sigClick(user.toString());
 
     }
 
 
     public void exitClic() {
+
         effect.exitClic();
+        user = null;
+        logger.info("User came out");
     }
 
 
