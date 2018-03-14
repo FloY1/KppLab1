@@ -38,6 +38,11 @@ public class NormalUser extends Users {
             date.setMinutes(0);
             createDate = date;
         }
+        if(byteAddLimit-file.length()>0){
+            byteAddLimit-=file.length();
+            return true;
+        }else
+            return false;
 
     }
 
