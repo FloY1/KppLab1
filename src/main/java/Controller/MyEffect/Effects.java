@@ -4,27 +4,33 @@ import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 
 public class Effects {
 
-   private StackPane sigStackPane;
 
-    private StackPane userStack;
+    private  Text katalogName;
+    private  ImageView userImage;
+    private  Text userName;
+    private  StackPane sigStackPane;
+    private  StackPane userStack;
+    private  Pane menuPane;
+    private  Pane listPane;
+    private  DropShadow dropShadow;
 
-    private Pane menuPane;
-
-    private Pane listPane;
-
-    private DropShadow dropShadow;
-
-    public Effects(StackPane sigStackPane, StackPane userStack, Pane menuPane, Pane listPane) {
+    public Effects(StackPane sigStackPane, StackPane userStack, Pane menuPane, Pane listPane, Text userName, ImageView userImg, Text katalogName) {
+        this.katalogName = katalogName;
+        this.userName = userName;
+        this.userImage = userImg;
         this.sigStackPane = sigStackPane;
-        this.userStack = userStack;
+        this.userStack = userStack;;
         this.menuPane = menuPane;
         this.listPane = listPane;
         dropShadow = new DropShadow();
@@ -52,7 +58,8 @@ public class Effects {
         maikFade(listPane,1,0);
         listPane.setDisable(true);
     }
-    public void catalogButtonClick() {
+    public void catalogButtonClick(String name) {
+        katalogName.setText(name);
         maikFade(menuPane, 1, 0);
         menuPane.setDisable(true);
         maikFade(listPane, 0, 1);
@@ -76,11 +83,27 @@ public class Effects {
 
     }
     public void sigClick(String userName)  {
+        if(userName.equals("isAdmin")) {
+            this.userName.setText("Admin");
+            this.userImage.setImage(new Image("img/admin.png"));
+        }
+        if(userName.equals("isUser")){
+            this.userName.setText("User");
+            this.userImage.setImage(new Image("img/user.png"));
+        }
+        if(userName.equals("isGuest")){
+            this.userName.setText("Guest");
+            this.userImage.setImage(new Image("img/guest.png"));
+        }
+        if(userName.equals("isAdmin")||userName.equals("isGuest")||userName.equals("isUser")) {
+            maikFade(sigStackPane, 1, 0);
+            sigStackPane.setDisable(true);
+            maikFade(userStack, 0, 1);
+            userStack.setDisable(false);
+        }else
+        {
 
-        maikFade(sigStackPane,1,0);
-        sigStackPane.setDisable(true);
-        maikFade(userStack,0,1);
-        userStack.setDisable(false);
+        }
 
     }
 

@@ -61,6 +61,7 @@ public class MainWidowKatalogController {
     @FXML
     private  TableColumn<Data,String> tableColum;
 
+    @FXML Text katalogName;
 
     private ObservableList<Data> list = FXCollections.observableArrayList();
 
@@ -76,7 +77,7 @@ public class MainWidowKatalogController {
     public void initialize() {
         tableColum.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         tableView.setItems(list);
-        effect = new Effects(sigStackPane, userStack, menuPane, listPane, userName,userImg);
+        effect = new Effects(sigStackPane, userStack, menuPane, listPane, userName,userImg,katalogName);
 
 
     }
@@ -89,7 +90,6 @@ public class MainWidowKatalogController {
     }
 
     public void catalogButtonClick(Event event) {
-        effect.catalogButtonClick();
 
         Node currentNode = (Node) event.getSource();
 
@@ -99,6 +99,7 @@ public class MainWidowKatalogController {
         List<Data> dataList = dataService.getAll();
         list.addAll(dataList);
 
+        effect.catalogButtonClick(currentNode.getId());
     }
 
     public void enteredButton(Event actionEvent) {
@@ -117,9 +118,13 @@ public class MainWidowKatalogController {
 
         user = UserFactory.getUser(loginField.getText(),passwordField.getText());
 
-
-        effect.sigClick(user.toString());
-
+        if(user!=null) {
+            effect.sigClick(user.toString());
+            logger.debug("User sign in");
+        }
+         else {
+            logger.warn("NullPont user");
+        }
     }
 
 
@@ -137,13 +142,12 @@ public class MainWidowKatalogController {
         if (file == null)
             logger.info("no choose File");
         else {
-           Data data = new Data(file.getName(), file.getPath());
+
+            Data data = new Data(file.getName(), file.getPath());
             list.add(data);
             dataService.add(data);
             logger.info("Successful");
         }
-
-
     }
 
 
