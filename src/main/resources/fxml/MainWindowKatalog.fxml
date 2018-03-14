@@ -84,7 +84,7 @@
                                     </PasswordField>
                                     <Button fx:id="sigButton" mnemonicParsing="false" onAction="#sigClick" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #f3f8f4cc;" text="sign in" textAlignment="CENTER" textOverrun="CLIP">
                                        <VBox.margin>
-                                          <Insets bottom="4.0" left="55.0" right="10.0" />
+                                          <Insets bottom="4.0" left="58.0" right="10.0" />
                                        </VBox.margin>
                                        <font>
                                           <Font name="Mukti Narrow Bold" size="14.0" />
@@ -106,12 +106,12 @@
                                           <Insets left="10.0" right="10.0" top="10.0" />
                                        </VBox.margin>
                                     </Text>
-                                    <ImageView fx:id="userImg" fitHeight="72.0" fitWidth="172.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="userImg" fitHeight="72.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/book.jpeg" />
                                        </image>
                                        <VBox.margin>
-                                          <Insets left="55.0" />
+                                          <Insets left="54.0" />
                                        </VBox.margin>
                                     </ImageView>
                                     <Button fx:id="ExitButton" mnemonicParsing="false" onAction="#exitClic" prefHeight="30.0" prefWidth="70.0" style="-fx-background-color: #f3f8f4cc;" text="Exit" textAlignment="CENTER" textOverrun="CLIP">
@@ -119,7 +119,7 @@
                                           <Font name="Mukti Narrow Bold" size="14.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets bottom="4.0" left="55.0" right="10.0" top="10.0" />
+                                          <Insets left="56.0" top="5.0" />
                                        </VBox.margin>
                                     </Button>
                                  </children>
@@ -167,10 +167,13 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Music" textAlignment="RIGHT" wrappingWidth="94.7294921875">
+                                    <Text fx:id="katalogName" strokeType="OUTSIDE" strokeWidth="0.0" text="Music" textAlignment="RIGHT" wrappingWidth="94.7294921875">
                                        <font>
                                           <Font name="Norasi" size="19.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets right="3.0" />
+                                       </HBox.margin>
                                     </Text>
                                  </children>
                               </HBox>
