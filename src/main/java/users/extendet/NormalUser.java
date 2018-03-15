@@ -53,8 +53,8 @@ public class NormalUser extends Users {
         date.setHours(0);
         date.setMinutes(0);
         createDate = date;
-
-
-
+    }
+    public long getLimit(){
+        return byteAddLimit;
     }
 }

@@ -12,10 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -24,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.apache.log4j.Logger;
 import users.Users;
+import users.extendet.NormalUser;
 
 import java.io.File;
 import java.util.List;
@@ -61,7 +59,17 @@ public class MainWidowKatalogController {
     @FXML
     private  TableColumn<Data,String> tableColum;
 
-    @FXML Text katalogName;
+    @FXML
+    private  Text katalogName;
+
+    @FXML
+    private Button deleteButton;
+
+    @FXML
+    private Button addButton;
+
+    @FXML
+    private Text tetxErrorSignIn;
 
     private ObservableList<Data> list = FXCollections.observableArrayList();
 
@@ -77,7 +85,17 @@ public class MainWidowKatalogController {
     public void initialize() {
         tableColum.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         tableView.setItems(list);
-        effect = new Effects(sigStackPane, userStack, menuPane, listPane, userName,userImg,katalogName);
+        effect = new Effects(
+                sigStackPane,
+                userStack,
+                menuPane,
+                listPane,
+                userName,
+                userImg,
+                katalogName,
+                addButton,
+                deleteButton,
+                tetxErrorSignIn);
 
 
     }
@@ -95,7 +113,11 @@ public class MainWidowKatalogController {
             dataService = new DataService(currentNode.getId());
             List<Data> dataList = dataService.getAll();
             list.addAll(dataList);
-            effect.catalogButtonClick(currentNode.getId(), user.iCanAdd(new File("")));
+            effect.catalogButtonClick(currentNode.getId(), user);
+        }
+        else
+        {
+            effect.printErrorSignInMassage("log in");
         }
 
     }
@@ -121,6 +143,7 @@ public class MainWidowKatalogController {
             logger.debug("User sign in");
         }
          else {
+            effect.sigClick("q");
             logger.warn("NullPont user");
         }
     }
@@ -140,11 +163,17 @@ public class MainWidowKatalogController {
         if (file == null)
             logger.info("no choose File");
         else {
+            if(user.iCanAdd(file)) {
+                Data data = new Data(file.getName(), file.getPath());
+                list.add(data);
+                dataService.add(data);
+                logger.info("Successful");
+            }else{
+                if (user  instanceof NormalUser) {
 
-            Data data = new Data(file.getName(), file.getPath());
-            list.add(data);
-            dataService.add(data);
-            logger.info("Successful");
+
+                }
+            }
         }
     }
 

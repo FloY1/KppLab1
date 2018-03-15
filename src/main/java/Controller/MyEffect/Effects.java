@@ -3,6 +3,7 @@ package Controller.MyEffect;
 import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,6 +12,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import users.Users;
+
+import java.io.File;
 
 
 public class Effects {
@@ -24,8 +28,14 @@ public class Effects {
     private  Pane menuPane;
     private  Pane listPane;
     private  DropShadow dropShadow;
+    private  Button addButton;
+    private  Button deleteButton;
+    private  Text tetxErrorSignIn;
 
-    public Effects(StackPane sigStackPane, StackPane userStack, Pane menuPane, Pane listPane, Text userName, ImageView userImg, Text katalogName) {
+    public Effects(StackPane sigStackPane, StackPane userStack, Pane menuPane, Pane listPane, Text userName, ImageView userImg, Text katalogName, Button addButton, Button deleteButton, Text tetxErrorSignIn) {
+        this.tetxErrorSignIn = tetxErrorSignIn;
+        this.addButton = addButton;
+        this.deleteButton = deleteButton;
         this.katalogName = katalogName;
         this.userName = userName;
         this.userImage = userImg;
@@ -58,12 +68,15 @@ public class Effects {
         maikFade(listPane,1,0);
         listPane.setDisable(true);
     }
-    public void catalogButtonClick(String name, boolean b) {
+    public void catalogButtonClick(String name, Users user) {
+        deleteButton.setDisable(!user.iCanDelete());
+        addButton.setDisable(!user.iCanAdd(new File("")));
         katalogName.setText(name);
         maikFade(menuPane, 1, 0);
         menuPane.setDisable(true);
         maikFade(listPane, 0, 1);
         listPane.setDisable(false);
+
     }
     public  void enteredButton(Event actionEvent){
 
@@ -102,7 +115,7 @@ public class Effects {
             userStack.setDisable(false);
         }else
         {
-
+            printErrorSignInMassage("incorrect");
         }
 
     }
@@ -114,7 +127,12 @@ public class Effects {
         sigStackPane.setDisable(false);
         maikFade(userStack,1,0);
         userStack.setDisable(true);
+        printErrorSignInMassage("");
 
 
+    }
+
+    public void printErrorSignInMassage(String massage){
+        tetxErrorSignIn.setText(massage);
     }
 }

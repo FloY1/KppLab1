@@ -66,6 +66,7 @@
                                           <Font name="Mukti Narrow" size="20.0" />
                                        </font>
                                     </Text>
+                                    <Text fx:id="tetxErrorSignIn" fill="#e11a1a" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="183.7294921875" />
                                     <TextField fx:id="loginField" alignment="TOP_CENTER" maxWidth="200.0" prefHeight="23.0" prefWidth="176.0" promptText="Login" style="-fx-background-color: f3f8f4cc; -fx-border-style: none;" text="Guest">
                                        <VBox.margin>
                                           <Insets left="5.0" right="5.0" />
@@ -107,9 +108,6 @@
                                        </VBox.margin>
                                     </Text>
                                     <ImageView fx:id="userImg" fitHeight="72.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../img/book.jpeg" />
-                                       </image>
                                        <VBox.margin>
                                           <Insets left="54.0" />
                                        </VBox.margin>
@@ -149,7 +147,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button mnemonicParsing="false" onMouseClicked="#addByttonClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefHeight="36.0" prefWidth="72.0" style="-fx-background-color: transparent;">
+                                    <Button fx:id="addButton" mnemonicParsing="false" onMouseClicked="#addByttonClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefHeight="36.0" prefWidth="72.0" style="-fx-background-color: transparent;">
                                        <graphic>
                                           <ImageView fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -158,7 +156,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button mnemonicParsing="false" onMouseClicked="#deleteButtonClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefHeight="36.0" prefWidth="72.0" style="-fx-background-color: transparent;">
+                                    <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteButtonClick" onMouseEntered="#enteredButton" onMouseExited="#exitedButton" prefHeight="36.0" prefWidth="72.0" style="-fx-background-color: transparent;">
                                        <graphic>
                                           <ImageView fitHeight="26.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
