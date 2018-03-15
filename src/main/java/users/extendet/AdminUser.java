@@ -3,6 +3,8 @@ package users.extendet;
 import org.apache.commons.codec.digest.DigestUtils;
 import users.Users;
 
+import java.io.File;
+
 public class AdminUser extends Users {
 
     private static final String password = "21232f297a57a5a743894a0e4a801fc3";
@@ -20,7 +22,7 @@ public class AdminUser extends Users {
     }
 
     @Override
-    public boolean iCanAdd() {
+    public boolean iCanAdd(File file) {
         return true;
     }
 

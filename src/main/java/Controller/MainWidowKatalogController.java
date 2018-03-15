@@ -90,16 +90,14 @@ public class MainWidowKatalogController {
     }
 
     public void catalogButtonClick(Event event) {
+        if(user != null) {
+            Node currentNode = (Node) event.getSource();
+            dataService = new DataService(currentNode.getId());
+            List<Data> dataList = dataService.getAll();
+            list.addAll(dataList);
+            effect.catalogButtonClick(currentNode.getId(), user.iCanAdd(new File("")));
+        }
 
-        Node currentNode = (Node) event.getSource();
-
-        dataService = new DataService(currentNode.getId());
-
-
-        List<Data> dataList = dataService.getAll();
-        list.addAll(dataList);
-
-        effect.catalogButtonClick(currentNode.getId());
     }
 
     public void enteredButton(Event actionEvent) {

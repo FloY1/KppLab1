@@ -58,7 +58,7 @@ public class Effects {
         maikFade(listPane,1,0);
         listPane.setDisable(true);
     }
-    public void catalogButtonClick(String name) {
+    public void catalogButtonClick(String name, boolean b) {
         katalogName.setText(name);
         maikFade(menuPane, 1, 0);
         menuPane.setDisable(true);

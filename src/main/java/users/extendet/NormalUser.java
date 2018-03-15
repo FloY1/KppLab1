@@ -29,6 +29,7 @@ public class NormalUser extends Users {
 
     @Override
     public boolean iCanAdd(File file) {
+        System.out.println(file.length());
         long currentHours = (new Date().getTime()- createDate.getTime())/(60*60*60);
         if(currentHours>24)
         {
