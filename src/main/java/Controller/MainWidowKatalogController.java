@@ -11,7 +11,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -19,11 +22,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import users.Users;
 import users.extendet.NormalUser;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -81,6 +87,9 @@ public class MainWidowKatalogController {
 
     private static final Logger logger = Logger.getLogger(MainWidowKatalogController.class);
 
+    private Stage massageStage = null;
+
+    private MasgeController masgeController = null;
 
     public void initialize() {
         tableColum.setCellValueFactory(new PropertyValueFactory<>("fileName"));
@@ -158,20 +167,33 @@ public class MainWidowKatalogController {
 
 
 
-    public void addByttonClick(Event event) {
+    public void addByttonClick(Event event) throws IOException {
         File file = new FileChooser().showOpenDialog(((Node) event.getSource()).getScene().getWindow());
         if (file == null)
             logger.info("no choose File");
         else {
-            if(user.iCanAdd(file)) {
+            if (user.iCanAdd(file)) {
                 Data data = new Data(file.getName(), file.getPath());
                 list.add(data);
                 dataService.add(data);
                 logger.info("Successful");
-            }else{
-                if (user  instanceof NormalUser) {
+            } else {
+                if (user instanceof NormalUser) {
 
-
+                    if (massageStage == null) {
+                        massageStage = new Stage();
+                        FXMLLoader fxmlLoader = new FXMLLoader();
+                        fxmlLoader.setLocation(MasgeController.class.getResource("../fxml/Masage.fxml"));
+                        Parent root = fxmlLoader.load();
+                        masgeController = fxmlLoader.getController();
+                        massageStage.setScene(new Scene(root));
+                        massageStage.setTitle("");
+                        massageStage.initModality(Modality.WINDOW_MODAL);
+                        massageStage.initOwner(
+                                ((Node) event.getSource()).getScene().getWindow());
+                    }
+                    massageStage.show();
+                    masgeController.setMasageText("Первышен лимит добавления, остаток: "+((NormalUser) user).getLimit()/1000+" KB");
                 }
             }
         }

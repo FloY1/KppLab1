@@ -127,7 +127,7 @@ public class Effects {
         sigStackPane.setDisable(false);
         maikFade(userStack,1,0);
         userStack.setDisable(true);
-        printErrorSignInMassage("");
+        printErrorSignInMassage(" ");
 
 
     }

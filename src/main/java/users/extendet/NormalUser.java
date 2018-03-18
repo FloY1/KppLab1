@@ -1,6 +1,7 @@
 package users.extendet;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.log4j.Logger;
 import users.Users;
 
 import java.io.File;
@@ -11,6 +12,8 @@ public class NormalUser extends Users {
     private static final String password = "ee11cbb19052e40b07aac0ca060c23ee";
 
     private  Date createDate ;
+
+    private Logger logger = Logger.getLogger(NormalUser.class);
 
     private  long byteAddLimit;
 
@@ -30,7 +33,8 @@ public class NormalUser extends Users {
     @Override
     public boolean iCanAdd(File file) {
         System.out.println(file.length());
-        long currentHours = (new Date().getTime()- createDate.getTime())/(60*60*60);
+        long currentHours = (new Date().getTime()- createDate.getTime())/(3600000);
+        logger.debug("\nTime : "+currentHours+"\nLinit: "+byteAddLimit+"\nFile size: "+file.length());
         if(currentHours>24)
         {
             byteAddLimit = 10485760;

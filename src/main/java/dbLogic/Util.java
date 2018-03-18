@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class Util {
     private  static final String DB_DRIVER = "com.mysql.jdbc.Driver";
@@ -17,11 +18,15 @@ public class Util {
         Connection connection = null;
         try {
             Class.forName(DB_DRIVER);
-            logger.debug(" set DB_DRIVER");
-            connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            logger.debug("set DB_DRIVER");
+            Properties properties = new Properties();
+            properties.setProperty("user", DB_USERNAME);
+            properties.setProperty("password",DB_PASSWORD);
+            
+            connection = DriverManager.getConnection(DB_URL,properties);
             logger.info("Connection successful");
         } catch (SQLException | ClassNotFoundException e) {
-            logger.warn("trow "+e);
+            logger.warn(e);
         }
         return  connection;
     }
