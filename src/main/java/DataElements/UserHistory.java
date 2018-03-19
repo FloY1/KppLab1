@@ -18,19 +18,11 @@ public class UserHistory {
     private int addLimit;
 
     public UserHistory(String userName, String action,int limit) {
+
         this.date = new Date((new java.util.Date()).getTime()) ;
         this.userName = userName;
         this.addLimit = limit;
         this.action = action;
-    }
-
-    @Override
-    public String toString() {
-        return "UserHistory{" +
-                "userName='" + userName + '\'' +
-                ", date=" + date +
-                ", action='" + action + '\'' +
-                '}';
     }
 
     public UserHistory(Date date, String userName, String action,int limit) {
@@ -42,6 +34,16 @@ public class UserHistory {
 
     public String getUserName() {
         return userName;
+    }
+
+    @Override
+    public String toString() {
+        return "UserHistory{\n" +
+                "userName='" + userName + '\'' +
+                ", \ndate=" + date +
+                ", \naction='" + action + '\'' +
+                ", \naddLimit=" + addLimit +
+                '}';
     }
 
     public void setUserName(String userName) {

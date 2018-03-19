@@ -1,12 +1,14 @@
 package users.extendet;
 
+import DataElements.UserHistory;
+import dbLogic.dao.service.HistoryService;
 import dbLogic.dao.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
 import users.Users;
 
 import java.io.File;
-import java.util.Date;
+import java.sql.Date;
 
 public class NormalUser extends Users {
 
@@ -34,14 +36,12 @@ public class NormalUser extends Users {
     @Override
     public boolean canBeAdded(File file) {
         System.out.println(file.length());
-        long currentHours = (new Date().getTime()- createDate.getTime())/(3600000);
+        long currentHours = (new Date((new java.util.Date()).getTime()).getTime()- createDate.getTime())/(3600000);
         logger.debug("\nTime : "+currentHours+"\nLinit: "+byteAddLimit+"\nFile size: "+file.length());
-        if(currentHours>24)
+        if(currentHours>=24)
         {
             byteAddLimit = 10485760;
-            Date date = new Date();
-            date.setHours(0);
-            date.setMinutes(0);
+            Date date = (new Date((new java.util.Date()).getTime()));
             createDate = date;
         }
         if(byteAddLimit-file.length()>0){
@@ -53,11 +53,12 @@ public class NormalUser extends Users {
     }
 
     public NormalUser() {
-        byteAddLimit = 10485760;
-        Date date = new Date();
-        date.setHours(0);
-        date.setMinutes(0);
-        createDate = date;
+        HistoryService historyService = new HistoryService();
+        logger.debug("create history service");
+        UserHistory userHistory = historyService.getLastUserDate();
+        logger.debug("get last Date");
+        createDate = userHistory.getDate();
+        byteAddLimit = userHistory.getAddLimit();
     }
     public int  getLimit(){
         return (int)byteAddLimit;

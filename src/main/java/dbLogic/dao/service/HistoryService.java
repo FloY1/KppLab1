@@ -15,12 +15,16 @@ public class HistoryService extends Util {
     private final static Logger logger = Logger.getLogger(DataService.class);
 
 
+
     private Connection connection = getConnection();
+
+
+
 
     public void add(UserHistory userHistory) {
         PreparedStatement preparedStatement = null;
 
-            String sql = "INSERT INTO History (date_action , user_name, actions) VALUES(?, ?, ?) ";
+            String sql = "INSERT INTO History (date_action , user_name, actions, add_limit) VALUES(?, ?, ?, ?) ";
         logger.debug("create sql :" + sql);
 
         try {
@@ -29,6 +33,7 @@ public class HistoryService extends Util {
             preparedStatement.setDate(1, userHistory.getDate());
             preparedStatement.setString(2, userHistory.getUserName());
             preparedStatement.setString(3, userHistory.getAction());
+            preparedStatement.setInt(4, userHistory.getAddLimit());
 
             preparedStatement.executeLargeUpdate();
 
@@ -95,20 +100,24 @@ public class HistoryService extends Util {
 
     public UserHistory getLastUserDate() {
         UserHistory userHistory = null;
-        String sql = "SELECT max(date_action), add_limit FROM History WHERE user_name = 'isUser' and actions='add' ";
+        String sql = "SELECT id, date_action, add_limit FROM History WHERE user_name = 'isUser' and actions='add' ";
 
         logger.debug(" create sql :" + sql);
         Statement statement = null;
+
+
         try {
             statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(sql);
-            userHistory = new UserHistory(resultSet.getDate(
-                    "max(date_action)"),
-                    "isUser",
-                    "add",
-                    resultSet.getInt("add_limit"));
-
+            int idMax = 0;
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                if(id >idMax)
+                {
+                    userHistory = new UserHistory(resultSet.getDate("date_action"),"isUser","add",resultSet.getInt("add_limit"));
+                }
+            }
 
         } catch (SQLException e) {
             logger.warn(e);
@@ -124,6 +133,7 @@ public class HistoryService extends Util {
             } else {
                 logger.warn("Statement = " + statement);
             }
+            logger.debug(userHistory);
             return userHistory;
         }
 
