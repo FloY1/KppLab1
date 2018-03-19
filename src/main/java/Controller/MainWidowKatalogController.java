@@ -173,7 +173,11 @@ public class MainWidowKatalogController {
 
 
     public void addByttonClick(Event event) throws IOException {
-        File file = new FileChooser().showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter(katalogName.getText(),getFilter())
+        );
+        File file = fileChooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
         if (file == null)
             logger.info("no choose File");
         else {
@@ -214,6 +218,19 @@ public class MainWidowKatalogController {
 
 
     public void tableClicked(Event event){
+
+    }
+
+    public String getFilter() {
+        if(katalogName.getText().equals("Music"))
+            return "*.mp3";
+        if(katalogName.getText().equals("Film"))
+            return "*.mp4";
+        if(katalogName.getText().equals("Book"))
+            return "*.pdf";
+        if(katalogName.getText().equals("Doc"))
+            return "*.docx";
+        return "*.*";
 
     }
 }
