@@ -1,6 +1,6 @@
 package DataElements;
 
-public class Data {
+public class DataFile {
     protected String fileName;
     protected String url;
     protected long id;
@@ -29,20 +29,20 @@ public class Data {
         this.url = url;
     }
 
-    public Data(String fileName, String url) {
+    public DataFile(String fileName, String url) {
         this.fileName = fileName;
         this.url = url;
     }
 
     @Override
     public String toString() {
-        return "Data{" +
+        return "DataFile{" +
                 "fileName='" + fileName + '\'' +
                 ", url='" + url + '\'' +
                 ", id=" + id +
                 '}';
     }
 
-    public Data() {
+    public DataFile() {
        }
 }

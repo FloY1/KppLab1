@@ -1,6 +1,6 @@
 package dbLogic.dao.service;
 
-import DataElements.Data;
+import DataElements.DataFile;
 import Factory.DataFactory;
 import dbLogic.dao.DataDAO;
 import dbLogic.Util;
@@ -25,7 +25,7 @@ public  class  DataService extends Util implements DataDAO {
     }
 
     @Override
-    public void add(Data data)  {
+    public void add(DataFile dataFile)  {
         PreparedStatement preparedStatement = null;
 
         String sql = "INSERT INTO "+tableName+" (NAME, URL) VALUES(?, ?) ";
@@ -34,9 +34,9 @@ public  class  DataService extends Util implements DataDAO {
         try {
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1, data.getFileName());
-            preparedStatement.setString(2,data.getUrl());
-            logger.info("add Date {"+data.getFileName()+"; "+data.getUrl()+"} successful");
+            preparedStatement.setString(1, dataFile.getFileName());
+            preparedStatement.setString(2, dataFile.getUrl());
+            logger.info("add Date {"+ dataFile.getFileName()+"; "+ dataFile.getUrl()+"} successful");
 
             preparedStatement.executeLargeUpdate();
 
@@ -59,8 +59,8 @@ public  class  DataService extends Util implements DataDAO {
     }
 
     @Override
-    public List<Data> getAll()  {
-        List<Data>  dataList = new ArrayList<>();
+    public List<DataFile> getAll()  {
+        List<DataFile> dataFileList = new ArrayList<>();
 
 
 
@@ -73,12 +73,12 @@ public  class  DataService extends Util implements DataDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while( resultSet.next()){
-                Data data = DataFactory.geData(tableName);
-                data.setId(resultSet.getInt("ID"));
-                data.setFileName(resultSet.getString("NAME"));
-                data.setUrl(resultSet.getString("URL"));
-                logger.debug("get data in DB :" + data);
-                dataList.add(data);
+                DataFile dataFile = DataFactory.geData(tableName);
+                dataFile.setId(resultSet.getInt("ID"));
+                dataFile.setFileName(resultSet.getString("NAME"));
+                dataFile.setUrl(resultSet.getString("URL"));
+                logger.debug("get dataFile in DB :" + dataFile);
+                dataFileList.add(dataFile);
 
 
             }
@@ -101,14 +101,14 @@ public  class  DataService extends Util implements DataDAO {
 
         }
         logger.info("Get successful");
-        return  dataList;
+        return dataFileList;
     }
 
 
 
 
     @Override
-    public void update(Data data) {
+    public void update(DataFile dataFile) {
         PreparedStatement preparedStatement = null;
 
         String sql = "UPDATE "+tableName+" SET NAME=?, URL=? WHERE ID=?";
@@ -116,9 +116,9 @@ public  class  DataService extends Util implements DataDAO {
         try {
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setString(1,data.getFileName());
-            preparedStatement.setString(2,data.getUrl());
-            preparedStatement.setLong(3,data.getId());
+            preparedStatement.setString(1, dataFile.getFileName());
+            preparedStatement.setString(2, dataFile.getUrl());
+            preparedStatement.setLong(3, dataFile.getId());
 
             preparedStatement.executeLargeUpdate();
             logger.info("Update successful");
@@ -141,7 +141,7 @@ public  class  DataService extends Util implements DataDAO {
     }
 
     @Override
-    public void remove(Data data) {
+    public void remove(DataFile dataFile) {
         PreparedStatement preparedStatement = null;
 
         String sql = "DELETE FROM " + tableName + " WHERE ID=?";
@@ -149,7 +149,7 @@ public  class  DataService extends Util implements DataDAO {
         try {
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setLong(1, data.getId());
+            preparedStatement.setLong(1, dataFile.getId());
 
 
             preparedStatement.executeLargeUpdate();

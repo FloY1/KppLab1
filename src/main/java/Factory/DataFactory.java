@@ -10,33 +10,33 @@ import org.apache.log4j.Logger;
 public class DataFactory {
     private static final Logger loger = Logger.getLogger(DataFactory.class);
 
-    public static Data geData(String s) {
-        Data data = null;
+    public static DataFile geData(String s) {
+        DataFile dataFile = null;
         try {
             switch (s) {
                 case "Book":
-                    data = new Book();
+                    dataFile = new Book();
                     break;
                 case "Doc":
-                    data = new Doc();
+                    dataFile = new Doc();
                     break;
                 case "Film":
-                    data = new Film();
+                    dataFile = new Film();
                     break;
                 case "Music":
-                    data = new Music();
+                    dataFile = new Music();
                     break;
                 default:
                     if (!s.equals("Date"))
                         loger.warn("No found class " + s);
-                    data = new Data();
+                    dataFile = new DataFile();
             }
         } catch (Exception e) {
             loger.warn(e);
         } finally {
-            loger.info("Create new " + data.getClass());
+            loger.info("Create new " + dataFile.getClass());
         }
-        return data;
+        return dataFile;
 
 
     }

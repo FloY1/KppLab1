@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class Util {
     private  static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-    private  static final String DB_URL = "jdbc:mysql://localhost:3306/Test";
+    private  static final String DB_URL = "jdbc:mysql://localhost:3306/MyBd";
     private  static final String DB_USERNAME = "root";
     private  static final String DB_PASSWORD = "root";
     private  static final Logger logger = Logger.getLogger(Util.class);

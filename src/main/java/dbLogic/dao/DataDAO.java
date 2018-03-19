@@ -1,25 +1,24 @@
 package dbLogic.dao;
 
 
-import DataElements.Data;
+import DataElements.DataFile;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface DataDAO {
 
      //create
-     void add(Data data);
+     void add(DataFile dataFile);
 
      //read
-     List<Data> getAll() ;
+     List<DataFile> getAll() ;
 
 
      //update
-     void update(Data data) ;
+     void update(DataFile dataFile) ;
 
      //delete
-     void remove(Data data) ;
+     void remove(DataFile dataFile) ;
 
 
 }

@@ -1,8 +1,8 @@
 package DataElements.extendet;
 
-import DataElements.Data;
+import DataElements.DataFile;
 
-public class Music extends Data {
+public class Music extends DataFile {
     @Override
     public String toString() {
         return "Music{" +

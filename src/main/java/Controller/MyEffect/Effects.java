@@ -4,6 +4,7 @@ import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -128,7 +129,6 @@ public class Effects {
         maikFade(userStack,1,0);
         userStack.setDisable(true);
         printErrorSignInMassage(" ");
-
 
     }
 

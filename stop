@@ -1,0 +1,65 @@
+[33mcommit 9e6c70292c35a7eba4a406f443673e90978caa01[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Mon Mar 19 08:19:40 2018 +0300
+
+     sa
+
+[33mcommit 04277e55257a57e2c837a14f0e480ff40a87662e[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Sun Mar 18 20:14:44 2018 +0300
+
+    fitst tab'
+
+[33mcommit 16f80912235e81c52e8d21b9ec3771fc3580a8c7[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Thu Mar 15 09:13:03 2018 +0300
+
+    добавил окно сообщения и класс контроллер
+
+[33mcommit fb0a4790dbb30ff95faffb5df294d6c2c839c20d[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Thu Mar 15 08:30:27 2018 +0300
+
+    не переодим в каталог если не вошли
+
+[33mcommit 84b44b8fd1e61362d81221e5eac5d825dd585825[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Wed Mar 14 23:19:52 2018 +0300
+
+    попытка сделать лимитное добавление
+
+[33mcommit 1d49faf8d364374d74891891c71ab3caec0ebf8f[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Wed Mar 14 23:15:45 2018 +0300
+
+    lol
+
+[33mcommit 6096524cef6ca7756774cb4dd7806bdda43bb035[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Wed Mar 14 22:49:26 2018 +0300
+
+    картинки пользоватей
+
+[33mcommit 778581d849e8d38513611fcf2c790d43fff634a5[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Wed Mar 14 22:48:30 2018 +0300
+
+    Небольшой фикс графики
+
+[33mcommit 8f3580b98b3c42b8c75ab6fb4bebca1efd83cb63[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Wed Mar 14 22:46:30 2018 +0300
+
+    set user sign in effect
+
+[33mcommit 32890e382fab327f23acbaf952f2e89b87a43a0b[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Wed Mar 14 20:46:41 2018 +0300
+
+    set effect sign in admin user
+
+[33mcommit b9b1ba5f737d7f48f8da4f37402da70483a5681d[m
+Author: FloY1 <artem.smolonskiy@mail.ru>
+Date:   Wed Mar 14 18:04:24 2018 +0300
+
+    Убрали грабли, работе кое как и слава богу

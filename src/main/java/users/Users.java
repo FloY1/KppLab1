@@ -1,22 +1,12 @@
 package users;
 
-import DataElements.Data;
-import dbLogic.dao.DataDAO;
-import dbLogic.dao.service.DataService;
-import javafx.scene.Node;
-import javafx.stage.FileChooser;
-import javafx.stage.Window;
-
 import java.io.File;
-import java.io.FileFilter;
-import java.sql.SQLException;
 
 public abstract class Users  {
 
 
-    public void show(Data data,Node node){
-    }
-    public boolean iCanAdd(File file) {
+
+    public  boolean iCanAdd(File file) {
         return false;
     }
 

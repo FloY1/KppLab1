@@ -4,7 +4,7 @@ package Controller;
 
 import Controller.MyEffect.Effects;
 
-import DataElements.Data;
+import DataElements.DataFile;
 import Factory.UserFactory;
 import dbLogic.dao.service.DataService;
 import javafx.collections.FXCollections;
@@ -63,7 +63,7 @@ public class MainWidowKatalogController {
     private TableView tableView;
 
     @FXML
-    private  TableColumn<Data,String> tableColum;
+    private  TableColumn<DataFile,String> tableColum;
 
     @FXML
     private  Text katalogName;
@@ -77,7 +77,7 @@ public class MainWidowKatalogController {
     @FXML
     private Text tetxErrorSignIn;
 
-    private ObservableList<Data> list = FXCollections.observableArrayList();
+    private ObservableList<DataFile> list = FXCollections.observableArrayList();
 
     private Users user;
 
@@ -89,7 +89,7 @@ public class MainWidowKatalogController {
 
     private Stage massageStage = null;
 
-    private MasgeController masgeController = null;
+    private MessageController messageController = null;
 
     public void initialize() {
         tableColum.setCellValueFactory(new PropertyValueFactory<>("fileName"));
@@ -120,8 +120,8 @@ public class MainWidowKatalogController {
         if(user != null) {
             Node currentNode = (Node) event.getSource();
             dataService = new DataService(currentNode.getId());
-            List<Data> dataList = dataService.getAll();
-            list.addAll(dataList);
+            List<DataFile> dataFileList = dataService.getAll();
+            list.addAll(dataFileList);
             effect.catalogButtonClick(currentNode.getId(), user);
         }
         else
@@ -173,9 +173,9 @@ public class MainWidowKatalogController {
             logger.info("no choose File");
         else {
             if (user.iCanAdd(file)) {
-                Data data = new Data(file.getName(), file.getPath());
-                list.add(data);
-                dataService.add(data);
+                DataFile dataFile = new DataFile(file.getName(), file.getPath());
+                list.add(dataFile);
+                dataService.add(dataFile);
                 logger.info("Successful");
             } else {
                 if (user instanceof NormalUser) {
@@ -183,9 +183,9 @@ public class MainWidowKatalogController {
                     if (massageStage == null) {
                         massageStage = new Stage();
                         FXMLLoader fxmlLoader = new FXMLLoader();
-                        fxmlLoader.setLocation(MasgeController.class.getResource("../fxml/Masage.fxml"));
+                        fxmlLoader.setLocation(MessageController.class.getResource("../fxml/Masage.fxml"));
                         Parent root = fxmlLoader.load();
-                        masgeController = fxmlLoader.getController();
+                        messageController = fxmlLoader.getController();
                         massageStage.setScene(new Scene(root));
                         massageStage.setTitle("");
                         massageStage.initModality(Modality.WINDOW_MODAL);
@@ -193,7 +193,7 @@ public class MainWidowKatalogController {
                                 ((Node) event.getSource()).getScene().getWindow());
                     }
                     massageStage.show();
-                    masgeController.setMasageText("Первышен лимит добавления, остаток: "+((NormalUser) user).getLimit()/1000+" KB");
+                    messageController.setMasageText("Первышен лимит добавления, остаток: "+((NormalUser) user).getLimit()/1000+" KB");
                 }
             }
         }

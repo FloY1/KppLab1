@@ -1,31 +1,30 @@
 package dbLogic.dao.service;
 
-import DataElements.Data;
+import DataElements.DataFile;
 import dbLogic.dao.DataDAO;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserService implements DataDAO {
 
 
     @Override
-    public void add(Data data)  {
+    public void add(DataFile dataFile)  {
 
     }
 
     @Override
-    public List<Data> getAll()  {
+    public List<DataFile> getAll()  {
         return null;
     }
 
     @Override
-    public void update(Data data)  {
+    public void update(DataFile dataFile)  {
 
     }
 
     @Override
-    public void remove(Data data)  {
+    public void remove(DataFile dataFile)  {
 
     }
 }

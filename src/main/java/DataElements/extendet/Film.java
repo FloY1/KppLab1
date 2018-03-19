@@ -1,8 +1,8 @@
 package DataElements.extendet;
 
-import DataElements.Data;
+import DataElements.DataFile;
 
-public class Film extends Data {
+public class Film extends DataFile {
 
     @Override
     public String toString() {
