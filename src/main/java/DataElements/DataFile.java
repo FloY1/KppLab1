@@ -1,9 +1,29 @@
 package DataElements;
 
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
 public class DataFile {
     protected String fileName;
     protected String url;
     protected long id;
+
+    public boolean show() {
+        File file = new File(url);
+        new Thread(()->{
+            try {
+                Desktop.getDesktop().open(file);
+                Desktop.getDesktop().open(file);
+            }catch (Exception e1){
+
+            }
+        }).start();
+
+
+        return true;
+    }
 
     public long getId() {
         return id;
