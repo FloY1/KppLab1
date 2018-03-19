@@ -4,7 +4,6 @@ import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,37 +20,21 @@ import java.io.File;
 public class Effects {
 
 
-    private  Text katalogName;
-    private  ImageView userImage;
-    private  Text userName;
-    private  StackPane sigStackPane;
-    private  StackPane userStack;
-    private  Pane menuPane;
-    private  Pane listPane;
+    private static  Effects effects;
     private  DropShadow dropShadow;
-    private  Button addButton;
-    private  Button deleteButton;
-    private  Text tetxErrorSignIn;
 
-    public Effects(StackPane sigStackPane, StackPane userStack, Pane menuPane, Pane listPane, Text userName, ImageView userImg, Text katalogName, Button addButton, Button deleteButton, Text tetxErrorSignIn) {
-        this.tetxErrorSignIn = tetxErrorSignIn;
-        this.addButton = addButton;
-        this.deleteButton = deleteButton;
-        this.katalogName = katalogName;
-        this.userName = userName;
-        this.userImage = userImg;
-        this.sigStackPane = sigStackPane;
-        this.userStack = userStack;;
-        this.menuPane = menuPane;
-        this.listPane = listPane;
+
+    private Effects() {
         dropShadow = new DropShadow();
-
         dropShadow.setRadius(5.0);
         dropShadow.setOffsetX(5.0);
         dropShadow.setOffsetY(5.0);
         dropShadow.setColor(Color.color(0.1, 0, 0.1));
-
-
+    }
+    public static Effects getEffectsForMainWindow(){
+        if(effects==null)
+            effects = new Effects();
+        return effects;
     }
 
     private void  maikFade(Node node, int fromV, int toV){
@@ -62,29 +45,25 @@ public class Effects {
         fadeTransition.setToValue(toV);
         fadeTransition.play();
     }
-    public void homeClick(){
-        maikFade(menuPane,0,1);
-        menuPane.setDisable(false);
+    public void twoElemeintFade(Node disableNode,Pane notDisableNode){
+        maikFade(notDisableNode,0,1);
+        notDisableNode.setDisable(false);
 
-        maikFade(listPane,1,0);
-        listPane.setDisable(true);
+        maikFade(disableNode,1,0);
+        disableNode.setDisable(true);
     }
-    public void catalogButtonClick(String name, Users user) {
-        deleteButton.setDisable(!user.iCanDelete());
-        addButton.setDisable(!user.iCanAdd(new File("")));
-        katalogName.setText(name);
-        maikFade(menuPane, 1, 0);
-        menuPane.setDisable(true);
-        maikFade(listPane, 0, 1);
-        listPane.setDisable(false);
+    public void userLogIn(String name, Users user,Button add,Button delete,Text massge) {
+        delete.setDisable(!user.iCanDelete());
+        add.setDisable(!user.iCanAdd(new File("")));
+        massge.setText(name);
 
     }
     public  void enteredButton(Event actionEvent){
 
-        Object sourse = actionEvent.getSource();
-        if(!(sourse instanceof Node))
+        Object source = actionEvent.getSource();
+        if(!(source instanceof Node))
             return;
-        ((Node)sourse).setEffect(dropShadow);
+        ((Node)source).setEffect(dropShadow);
     }
 
 
@@ -96,43 +75,28 @@ public class Effects {
 
 
     }
-    public void sigClick(String userName)  {
-        if(userName.equals("isAdmin")) {
-            this.userName.setText("Admin");
-            this.userImage.setImage(new Image("img/admin.png"));
+    public void enty(String name,Text textName,ImageView img,Pane disablePane,Pane notDisablePane )  {
+        if(name.equals("isAdmin")) {
+            textName.setText("Admin");
+            img.setImage(new Image("img/admin.png"));
         }
-        if(userName.equals("isUser")){
-            this.userName.setText("User");
-            this.userImage.setImage(new Image("img/user.png"));
+        if(name.equals("isUser")){
+            textName.setText("User");
+            img.setImage(new Image("img/user.png"));
         }
-        if(userName.equals("isGuest")){
-            this.userName.setText("Guest");
-            this.userImage.setImage(new Image("img/guest.png"));
+        if(name.equals("isGuest")){
+            textName.setText("Guest");
+            img.setImage(new Image("img/guest.png"));
         }
-        if(userName.equals("isAdmin")||userName.equals("isGuest")||userName.equals("isUser")) {
-            maikFade(sigStackPane, 1, 0);
-            sigStackPane.setDisable(true);
-            maikFade(userStack, 0, 1);
-            userStack.setDisable(false);
-        }else
-        {
-            printErrorSignInMassage("incorrect");
+        if(name.equals("isAdmin")|| name.equals("isGuest")|| name.equals("isUser")) {
+            twoElemeintFade(disablePane,notDisablePane);
         }
 
     }
 
-    public void exitClic ()  {
 
 
-        maikFade(sigStackPane,0,1);
-        sigStackPane.setDisable(false);
-        maikFade(userStack,1,0);
-        userStack.setDisable(true);
-        printErrorSignInMassage(" ");
-
-    }
-
-    public void printErrorSignInMassage(String massage){
-        tetxErrorSignIn.setText(massage);
+    public void printErrorSignInMassage(String massage,Text textEror){
+        textEror.setText(massage);
     }
 }

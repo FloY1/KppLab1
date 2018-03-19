@@ -94,23 +94,14 @@ public class MainWidowKatalogController {
     public void initialize() {
         tableColum.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         tableView.setItems(list);
-        effect = new Effects(
-                sigStackPane,
-                userStack,
-                menuPane,
-                listPane,
-                userName,
-                userImg,
-                katalogName,
-                addButton,
-                deleteButton,
-                tetxErrorSignIn);
+        effect = Effects.getEffectsForMainWindow();
+
 
 
     }
 
     public void homeClick() {
-        effect.homeClick();
+        effect.twoElemeintFade(listPane,menuPane);
         list.clear();
         dataService.closeConnectin();
         logger.info("Successful");
@@ -122,11 +113,12 @@ public class MainWidowKatalogController {
             dataService = new DataService(currentNode.getId());
             List<DataFile> dataFileList = dataService.getAll();
             list.addAll(dataFileList);
-            effect.catalogButtonClick(currentNode.getId(), user);
+            effect.userLogIn(currentNode.getId(), user,addButton,deleteButton,katalogName);
+            effect.twoElemeintFade(menuPane,listPane);
         }
         else
         {
-            effect.printErrorSignInMassage("log in");
+            effect.printErrorSignInMassage("log in",tetxErrorSignIn);
         }
 
     }
@@ -148,11 +140,12 @@ public class MainWidowKatalogController {
         user = UserFactory.getUser(loginField.getText(),passwordField.getText());
 
         if(user!=null) {
-            effect.sigClick(user.toString());
+            effect.enty(user.toString(),userName,userImg,sigStackPane,userStack);
             logger.debug("User sign in");
         }
          else {
-            effect.sigClick("q");
+            effect.printErrorSignInMassage("incorrect",tetxErrorSignIn);
+
             logger.warn("NullPont user");
         }
     }
@@ -160,7 +153,8 @@ public class MainWidowKatalogController {
 
     public void exitClic() {
 
-        effect.exitClic();
+        effect.twoElemeintFade(userStack,sigStackPane);
+        effect.printErrorSignInMassage("",tetxErrorSignIn);
         user = null;
         logger.info("User came out");
     }
