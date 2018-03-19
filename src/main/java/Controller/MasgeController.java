@@ -1,11 +1,18 @@
 package Controller;
 
+import DataElements.Data;
+import DataElements.extendet.Book;
+import DataElements.extendet.Doc;
+import DataElements.extendet.Film;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MasgeController {
 
@@ -26,6 +33,9 @@ public class MasgeController {
 
     public void setMasageText(String masageText){
         this.masageText.setText(masageText);
+
     }
+
+
 
 }
