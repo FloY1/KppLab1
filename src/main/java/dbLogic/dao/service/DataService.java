@@ -36,7 +36,7 @@ public  class  DataService extends Util implements DataDAO {
 
             preparedStatement.setString(1, dataFile.getFileName());
             preparedStatement.setString(2, dataFile.getUrl());
-            logger.info("add Date {"+ dataFile.getFileName()+"; "+ dataFile.getUrl()+"} successful");
+            logger.debug("add Date {"+ dataFile.getFileName()+"; "+ dataFile.getUrl()+"} successful");
 
             preparedStatement.executeLargeUpdate();
 
@@ -100,7 +100,7 @@ public  class  DataService extends Util implements DataDAO {
 
 
         }
-        logger.info("Get successful");
+        logger.debug("Get successful");
         return dataFileList;
     }
 
@@ -121,7 +121,7 @@ public  class  DataService extends Util implements DataDAO {
             preparedStatement.setLong(3, dataFile.getId());
 
             preparedStatement.executeLargeUpdate();
-            logger.info("Update successful");
+            logger.debug("Update successful");
 
         } catch (SQLException e) {
             logger.warn(e);

@@ -14,7 +14,8 @@ public class Util {
     private  static final String DB_PASSWORD = "root";
     private  static final Logger logger = Logger.getLogger(Util.class);
 
-    public Connection getConnection() {
+
+    protected static Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName(DB_DRIVER);
