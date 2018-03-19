@@ -4,8 +4,10 @@ package Controller;
 
 import Controller.MyEffect.Effects;
 import DataElements.DataFile;
+import DataElements.UserHistory;
 import Factory.UserFactory;
 import dbLogic.dao.service.DataService;
+import dbLogic.dao.service.HistoryService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -82,6 +84,8 @@ public class MainWidowKatalogController {
 
     private DataService dataService;
 
+    private HistoryService historyService;
+
     private Effects effect;
 
     private static final Logger logger = Logger.getLogger(MainWidowKatalogController.class);
@@ -94,6 +98,7 @@ public class MainWidowKatalogController {
         tableColum.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         tableView.setItems(list);
         effect = Effects.getEffectsForMainWindow();
+        historyService = new HistoryService();
 
         tableView.setOnMouseClicked(event -> {
             if(event.getClickCount() >1)
@@ -178,10 +183,11 @@ public class MainWidowKatalogController {
         if (file == null)
             logger.info("no choose File");
         else {
-            if (user.iCanAdd(file)) {
+            if (user.canBeAdded(file)) {
                 DataFile dataFile = new DataFile(file.getName(), file.getPath());
                 list.add(dataFile);
                 dataService.add(dataFile);
+                historyService.add(new UserHistory(user.toString(),"add",user.getLimit()));
                 logger.info("Successful");
             } else {
                 if (user instanceof NormalUser) {

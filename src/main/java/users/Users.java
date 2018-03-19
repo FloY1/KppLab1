@@ -6,17 +6,22 @@ public abstract class Users  {
 
 
 
-    public  boolean iCanAdd(File file) {
+    public  boolean canBeAdded(File file) {
         return false;
     }
 
-    public boolean  iCanDelete(){
+    public boolean canBeDeleted(){
         return false;
 
     }
+    public int  getLimit(){
+        return 0;
+    }
+
 
     @Override
     public String toString() {
         return "null";
+
     }
 }

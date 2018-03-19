@@ -17,10 +17,10 @@ public class HistoryService extends Util {
 
     private Connection connection = getConnection();
 
-    void add(UserHistory userHistory) {
+    public void add(UserHistory userHistory) {
         PreparedStatement preparedStatement = null;
 
-        String sql = "INSERT INTO HISTORY (DATETIME, USER_NAME,Action) VALUES(?, ?, ?) ";
+            String sql = "INSERT INTO History (date_action , user_name, actions) VALUES(?, ?, ?) ";
         logger.debug("create sql :" + sql);
 
         try {
@@ -53,7 +53,7 @@ public class HistoryService extends Util {
     public List<UserHistory> getAll() {
         List<UserHistory> userHistoryList = new ArrayList<>();
 
-        String sql = "SELECT DATE, USER_NAME, ACTION FROM HISTORY";
+        String sql = "SELECT date_action , user_name, actions, add_limit FROM History";
         logger.debug(" create sql :" + sql);
         Statement statement = null;
 
@@ -62,9 +62,10 @@ public class HistoryService extends Util {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                userHistoryList.add((new UserHistory(resultSet.getDate("DATE"),
-                        resultSet.getString("USER_NAME"),
-                        resultSet.getString("ACTION"))));
+                userHistoryList.add((new UserHistory(resultSet.getDate("date_action"),
+                        resultSet.getString("user_name"),
+                        resultSet.getString("actions"),
+                        resultSet.getInt("add_limit"))));
 
                 logger.debug("get dataFile in DB");
 
@@ -92,9 +93,9 @@ public class HistoryService extends Util {
         return userHistoryList;
     }
 
-    public Date getLastUserDate() {
-        Date date = null;
-        String sql = "SELECT max(date) FROM Book WHERE name = 'user' ";
+    public UserHistory getLastUserDate() {
+        UserHistory userHistory = null;
+        String sql = "SELECT max(date_action), add_limit FROM History WHERE user_name = 'isUser' and actions='add' ";
 
         logger.debug(" create sql :" + sql);
         Statement statement = null;
@@ -102,7 +103,11 @@ public class HistoryService extends Util {
             statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(sql);
-            date = resultSet.getDate("max(date)");
+            userHistory = new UserHistory(resultSet.getDate(
+                    "max(date_action)"),
+                    "isUser",
+                    "add",
+                    resultSet.getInt("add_limit"));
 
 
         } catch (SQLException e) {
@@ -119,7 +124,7 @@ public class HistoryService extends Util {
             } else {
                 logger.warn("Statement = " + statement);
             }
-            return date;
+            return userHistory;
         }
 
 

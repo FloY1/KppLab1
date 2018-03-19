@@ -8,7 +8,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -53,8 +52,8 @@ public class Effects {
         disableNode.setDisable(true);
     }
     public void userLogIn(String name, Users user,Button add,Button delete,Text massge) {
-        delete.setDisable(!user.iCanDelete());
-        add.setDisable(!user.iCanAdd(new File("")));
+        delete.setDisable(!user.canBeDeleted());
+        add.setDisable(!user.canBeAdded(new File("")));
         massge.setText(name);
 
     }

@@ -32,7 +32,7 @@ public class NormalUser extends Users {
 
 
     @Override
-    public boolean iCanAdd(File file) {
+    public boolean canBeAdded(File file) {
         System.out.println(file.length());
         long currentHours = (new Date().getTime()- createDate.getTime())/(3600000);
         logger.debug("\nTime : "+currentHours+"\nLinit: "+byteAddLimit+"\nFile size: "+file.length());
@@ -59,7 +59,7 @@ public class NormalUser extends Users {
         date.setMinutes(0);
         createDate = date;
     }
-    public long getLimit(){
-        return byteAddLimit;
+    public int  getLimit(){
+        return (int)byteAddLimit;
     }
 }

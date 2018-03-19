@@ -7,9 +7,20 @@ public class UserHistory {
     private Date date;
     private String action;
 
-    public UserHistory(String userName, String action) {
+    public int getAddLimit() {
+        return addLimit;
+    }
+
+    public void setAddLimit(int addLimit) {
+        this.addLimit = addLimit;
+    }
+
+    private int addLimit;
+
+    public UserHistory(String userName, String action,int limit) {
         this.date = new Date((new java.util.Date()).getTime()) ;
         this.userName = userName;
+        this.addLimit = limit;
         this.action = action;
     }
 
@@ -22,7 +33,8 @@ public class UserHistory {
                 '}';
     }
 
-    public UserHistory(Date date, String userName, String action) {
+    public UserHistory(Date date, String userName, String action,int limit) {
+        this.addLimit = limit;
         this.userName = userName;
         this.date = date;
         this.action = action;

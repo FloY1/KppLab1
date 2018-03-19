@@ -22,12 +22,12 @@ public class AdminUser extends Users {
     }
 
     @Override
-    public boolean iCanAdd(File file) {
+    public boolean canBeAdded(File file) {
         return true;
     }
 
     @Override
-    public boolean iCanDelete() {
+    public boolean canBeDeleted() {
         return true;
     }
 }
