@@ -9,21 +9,40 @@ import org.apache.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/** Класс для считывания и вывода данных DataFile в MySql
+ * @author  artem.smolonskiy
+ * @version 1.0
+ */
 public  class  DataService extends Util implements DataDAO {
 
+    /**
+     * Логер
+     */
     private  final static Logger logger = Logger.getLogger(DataService.class);
 
-
+    /**
+     * Конекшен к базе
+     */
     private  Connection connection = getConnection();
 
+    /**
+     * Имя таблицы базы
+     */
     private  String tableName;
 
+    /**
+     * Создание объекта в соответствии с данными
+     * @param tableName имя таблицы
+     */
     public DataService(String tableName) {
         this.tableName = tableName;
         logger.debug("set tableName "+tableName);
     }
 
+    /**
+     * Вывод в бд
+     * @param dataFile что выводим
+     */
     @Override
     public void add(DataFile dataFile)  {
         PreparedStatement preparedStatement = null;
@@ -58,9 +77,13 @@ public  class  DataService extends Util implements DataDAO {
 
     }
 
+    /**
+     * Считывание из бд
+     * @return Список даных
+     */
     @Override
     public List<DataFile> getAll()  {
-        List<DataFile> dataFileList = new ArrayList<>();
+        List<DataFile> dataFileList =  new ArrayList<>();
 
 
 
@@ -73,7 +96,8 @@ public  class  DataService extends Util implements DataDAO {
 
             ResultSet resultSet = statement.executeQuery(sql);
             while( resultSet.next()){
-                DataFile dataFile = DataFactory.geData(tableName);
+
+                DataFile dataFile = DataFactory.getData(tableName);
                 dataFile.setId(resultSet.getInt("ID"));
                 dataFile.setFileName(resultSet.getString("NAME"));
                 dataFile.setUrl(resultSet.getString("URL"));
@@ -105,8 +129,10 @@ public  class  DataService extends Util implements DataDAO {
     }
 
 
-
-
+    /**
+     * Обновление в бд
+     * @param dataFile новый файл
+     */
     @Override
     public void update(DataFile dataFile) {
         PreparedStatement preparedStatement = null;
@@ -140,6 +166,10 @@ public  class  DataService extends Util implements DataDAO {
 
     }
 
+    /**
+     * Удаление из бд
+     * @param dataFile удаляймый файл
+     */
     @Override
     public void remove(DataFile dataFile) {
         PreparedStatement preparedStatement = null;
@@ -170,6 +200,9 @@ public  class  DataService extends Util implements DataDAO {
         }
     }
 
+    /**
+     * Закрытие конекшена
+     */
     public void closeConnectin(){
         if(connection!=null)
         try {

@@ -8,9 +8,16 @@ import javafx.stage.Stage;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.sql.SQLException;
-
+/** Глайвный класс
+ * @author  artem.smolonskiy
+ * @version 1.0
+ */
 public class Main extends Application {
-
+    /**
+     * Создаёт главное окно
+     * @param primaryStage Stage окна
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -27,12 +34,11 @@ public class Main extends Application {
 
     }
 
-
-    public static void main(String[] args) throws SQLException {
+    /**
+     * Стартовый метод
+     * @param args дескрипт консоли
+     */
+    public static void main(String[] args) {
         launch(args);
-
-
-
-
     }
 }

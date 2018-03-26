@@ -6,11 +6,22 @@ import DataElements.extendet.Doc;
 import DataElements.extendet.Film;
 import DataElements.extendet.Music;
 import org.apache.log4j.Logger;
-
+/** Класс фабрика для класса DataFactory
+ * @author  artem.smolonskiy
+ * @version 1.0
+ */
 public class DataFactory {
+    /**
+     * Логер
+     */
     private static final Logger loger = Logger.getLogger(DataFactory.class);
 
-    public static DataFile geData(String s) {
+    /**
+     * Создаёт объект в соответствии с введённым параметром+
+     * @param s имя класса
+     * @return объект класса
+     */
+    public static DataFile getData(String s) {
         DataFile dataFile = null;
         try {
             switch (s) {
@@ -34,7 +45,7 @@ public class DataFactory {
         } catch (Exception e) {
             loger.warn(e);
         } finally {
-            loger.info("Create new " + dataFile.getClass());
+            loger.debug("Create new " + dataFile.getClass());
         }
         return dataFile;
 

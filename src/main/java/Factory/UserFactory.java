@@ -5,10 +5,22 @@ import org.apache.log4j.Logger;
 import users.extendet.AdminUser;
 import users.extendet.GuestUser;
 import users.extendet.NormalUser;
-
+/** Класс фабрика для класса Users
+ * @author  artem.smolonskiy
+ * @version 1.0
+ */
 public class UserFactory {
+    /**
+     * Логер
+     */
     private  static Logger logger = Logger.getLogger(UserFactory.class);
 
+    /**
+     * Создаёт объект в соответствии с введёнными параметрами
+     * @param userName имя пользователя
+     * @param password пароль
+     * @return объект класса
+     */
     public static Users getUser(String userName,String password) {
         Users user = null;
 
@@ -34,7 +46,7 @@ public class UserFactory {
                 logger.warn("incorrect login to the system");
 
         }
-        logger.info(user);
+        logger.debug(user);
         return user;
     }
 }

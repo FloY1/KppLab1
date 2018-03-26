@@ -9,15 +9,30 @@ import users.Users;
 
 import java.io.File;
 import java.sql.Date;
-
+/** Класс пользователя с правами User
+ * @author  artem.smolonskiy
+ * @version 1.0
+ */
 public class NormalUser extends Users {
 
+    /**
+     * Пароль
+     */
     private static final String password = UserService.getUserPassword("user");
 
-    private  Date createDate ;
+    /**
+     * Дата последнего добавления
+     */
+    private  Date lastAddDate;
 
+    /**
+     * Логер
+     */
     private Logger logger = Logger.getLogger(NormalUser.class);
 
+    /**
+     * Лимит на добавление
+     */
     private  long byteAddLimit;
 
     @Override
@@ -25,6 +40,11 @@ public class NormalUser extends Users {
         return "isUser";
     }
 
+    /**
+     * Сравнивает пароль с входными данными
+     * @param password вводимый пароль
+     * @return совпадает или нет
+     */
     public static boolean isNormalUserPassword(String password){
         if(DigestUtils.md5Hex(password+"!789~234Q").equals(NormalUser.password))
             return true;
@@ -33,16 +53,21 @@ public class NormalUser extends Users {
     }
 
 
+    /**
+     * Способен ли добавить файл
+     * @param file добавляемый файл
+     * @return да или нет
+     */
     @Override
     public boolean canBeAdded(File file) {
         System.out.println(file.length());
-        long currentHours = (new Date((new java.util.Date()).getTime()).getTime()- createDate.getTime())/(3600000);
+        long currentHours = (new Date((new java.util.Date()).getTime()).getTime()- lastAddDate.getTime())/(3600000);
         logger.debug("\nTime : "+currentHours+"\nLinit: "+byteAddLimit+"\nFile size: "+file.length());
         if(currentHours>=24)
         {
             byteAddLimit = 10485760;
             Date date = (new Date((new java.util.Date()).getTime()));
-            createDate = date;
+            lastAddDate = date;
         }
         if(byteAddLimit-file.length()>0){
             byteAddLimit-=file.length();
@@ -52,14 +77,22 @@ public class NormalUser extends Users {
 
     }
 
+    /**
+     * Создаёт объект
+     */
     public NormalUser() {
         HistoryService historyService = new HistoryService();
         logger.debug("create history service");
         UserHistory userHistory = historyService.getLastUserDate();
         logger.debug("get last Date");
-        createDate = userHistory.getDate();
+        lastAddDate = userHistory.getDate();
         byteAddLimit = userHistory.getAddLimit();
     }
+
+    /**
+     * Возвращает поле
+     * @return лимит добвления
+     */
     public int  getLimit(){
         return (int)byteAddLimit;
     }

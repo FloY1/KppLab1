@@ -175,7 +175,7 @@
                                     </Text>
                                  </children>
                               </HBox>
-                              <TableView fx:id="tableView" onMouseClicked="#tableClicked" prefHeight="534.0" prefWidth="235.0">
+                              <TableView fx:id="tableView"  prefHeight="534.0" prefWidth="235.0">
                                 <columns>
                                   <TableColumn fx:id="tableColum" editable="false" prefWidth="234.0" />
                                 </columns>
